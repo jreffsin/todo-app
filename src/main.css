@@ -90,7 +90,7 @@ header {
 }
 
 .nameWrapper > img {
-    height: 30px;
+    height: 36px;
     padding: 0 5px;
 }
 
@@ -100,6 +100,10 @@ header {
     }
 .project:hover .trashIcon {
       display:block;
+    }
+
+.project:hover .nameWrapper {
+    font-weight: 900;
     }
 
 .nameWrapper {

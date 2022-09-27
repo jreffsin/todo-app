@@ -1,5 +1,5 @@
 import css from "./main.css";
-import {createProjectElement} from "./projectcreator.js"
+import {createProjectElement} from "./domManipulations.js"
 
 createProjectElement('Brett');
 
