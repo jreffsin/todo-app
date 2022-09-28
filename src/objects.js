@@ -1,45 +1,42 @@
 //project object
 //project has a name, list of contained todos, number of contained todos
 
-import { library } from "webpack"; //why did this get added?
+const Project = function (projectName) {
 
-export const Project = function (name) {
-    let name = name;
-    
-    // goto projects table and get ID for Proj
-    let id = ProjectLibrary.getId;
-
-    // array to hold all todos contained in project
+    let name = projectName;
+    let id = projectLibrary.assignId();
     let todoList = [];
 
-    let addProjToTable = function (){
-        //add project to projects table
-    };
-
-
+    return {name, id, todoList};
 
 };
 
-export ProjectLibrary = {
+export let projectLibrary = {
 
-    idHigh: 0,
+    idCounter: -1,
     library: [],
-    addProject: (project) {
-        library.push(project);
+    addProject: function (project) {
+        this.library.push(project);
     },
-    removeProject: (project.id) {
-        //need to add code here to remove project from library array of given id
+    removeProject: function(project) {
+        for(let i = 0; i < this.library.length; i++){
+            if (this.library[i].id === project.id){
+                this.library.splice(i, 1);
+                break;
+            };
+        };
     },
-    getId: () {
-        idHigh++;
-        return idHigh;
+    assignId: function () {
+        this.idCounter++;
+        return this.idCounter;
     }
 
 };
 
-//todo object
+export const createProject = function (projectName) {
+    let project = Project(projectName);
+    projectLibrary.addProject(project);
+    return project;
+};
 
-//projects table
-//addProjectToTable Function
-
-//todo table
+// need to create todo object

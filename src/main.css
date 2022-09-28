@@ -77,11 +77,11 @@ header {
 .project {
     height: 50px;
     width: 100%;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .project > img {
@@ -102,8 +102,9 @@ header {
       display:block;
     }
 
-.project:hover .nameWrapper {
-    font-weight: 900;
+.project:hover {
+    /* font-weight: 900; */
+    background-color: aquamarine;
     }
 
 .nameWrapper {
