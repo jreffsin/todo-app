@@ -1,16 +1,19 @@
 import css from "./main.css";
 import {createProjectElement} from "./domManipulations"
-import {projectLibrary, createProject} from "./objects"
+import {projectLibrary, createProject, createTodo} from "./objects"
 
-createProjectElement('Brett');
-// let brettProject = Project('brett');
 
 let brettProject = createProject('brett');
 
 let clarkProject = createProject('clark');
-console.log(projectLibrary);
 
-projectLibrary.removeProject(brettProject);
-console.log(projectLibrary);
+createTodo(brettProject, 'cheryl', 'lorem ipsum', '12/01/22', 'high');
+createTodo(brettProject, 'dark clark', 'lorem ipsum', '11/01/22', 'low');
+
+console.log(brettProject);
+
+
+// projectLibrary.removeProject(brettProject);
+
 
 // Function that generates new todo item

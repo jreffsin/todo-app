@@ -1,13 +1,48 @@
-//project object
-//project has a name, list of contained todos, number of contained todos
+import {createProjectElement} from './domManipulations'
 
 const Project = function (projectName) {
 
     let name = projectName;
     let id = projectLibrary.assignId();
-    let todoList = [];
 
-    return {name, id, todoList};
+    let todoLibrary = {
+
+        idCounter: -1,
+        library: [],
+        add: function (todoItem) {
+            this.library.push(todoItem);
+        },
+        remove: function(todoItem) {
+            for(let i = 0; i < this.library.length; i++){
+                if (this.library[i].id === todoItem.id){
+                    this.library.splice(i, 1);
+                    break;
+                };
+            };
+        },
+        assignId: function () {
+            this.idCounter++;
+            return this.idCounter;
+        }
+    
+    };
+
+    return {name, id, todoLibrary};
+
+};
+
+const Todo = function (project, todoName, todoDescription, todoDueDate, todoPriority) {
+
+    let name = todoName;
+    let description = todoDescription;
+    let dueDate = todoDueDate;
+    let priority = todoPriority;
+    let id = project.todoLibrary.assignId();
+
+    return {
+        name, description, dueDate, priority, id
+    }
+
 
 };
 
@@ -36,7 +71,12 @@ export let projectLibrary = {
 export const createProject = function (projectName) {
     let project = Project(projectName);
     projectLibrary.addProject(project);
+    createProjectElement(projectName);
     return project;
 };
 
-// need to create todo object
+export const createTodo = function (project, name, description, dueDate, priority) {
+    let todo = Todo(project, name, description, dueDate, priority);
+    project.todoLibrary.add(todo);
+    return todo;
+};

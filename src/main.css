@@ -77,11 +77,10 @@ header {
 .project {
     height: 50px;
     width: 100%;
-    /* background-color: blueviolet; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* border: 1px solid black; */
+    cursor: pointer;
 }
 
 .project > img {
@@ -96,14 +95,20 @@ header {
 
 /* make trash icon invisible until project div is hovered over */
 .project .trashIcon {
-    display:none;
-    }
-.project:hover .trashIcon {
-      display:block;
+    display: none;
     }
 
+.project:hover .trashIcon {
+      display: block;
+      opacity: 0.4;
+    }
+
+.trashIcon:hover {
+    display: block;
+    opacity: 1.0 !important;
+}
+
 .project:hover {
-    /* font-weight: 900; */
     background-color: aquamarine;
     }
 
