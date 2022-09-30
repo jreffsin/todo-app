@@ -1,16 +1,18 @@
 import css from "./main.css";
-import {createProjectElement} from "./domManipulations"
+import {createProjectElement, createProjectForm} from "./domManipulations"
 import {projectLibrary, createProject, createTodo} from "./objects"
 
 
-let brettProject = createProject('brett');
+createProject('todos');
 
-let clarkProject = createProject('clark');
+// let clarkProject = createProject('clark');
 
-createTodo(brettProject, 'cheryl', 'lorem ipsum', '12/01/22', 'high');
-createTodo(brettProject, 'dark clark', 'lorem ipsum', '11/01/22', 'low');
+// createTodo(brettProject, 'cheryl', 'lorem ipsum', '12/01/22', 'high');
+// createTodo(brettProject, 'dark clark', 'lorem ipsum', '11/01/22', 'low');
 
-console.log(brettProject);
+// createProjectForm();
+
+// console.log(brettProject);
 
 
 // projectLibrary.removeProject(brettProject);
