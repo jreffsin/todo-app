@@ -1,5 +1,3 @@
-import {createProjectElement} from './domManipulations'
-
 const Project = function (projectName) {
 
     let name = projectName;
@@ -68,14 +66,12 @@ export let projectLibrary = {
 
 };
 
-export const createProject = function (projectName) {
+export const createProjectObject = function (projectName) {
     let project = Project(projectName);
     projectLibrary.addProject(project);
-    createProjectElement(projectName);
-    return project;
 };
 
-export const createTodo = function (project, name, description, dueDate, priority) {
+export const createTodoObject = function (project, name, description, dueDate, priority) {
     let todo = Todo(project, name, description, dueDate, priority);
     project.todoLibrary.add(todo);
     return todo;

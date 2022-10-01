@@ -70,7 +70,7 @@ header {
 }
 
 .sidebar {
-    background-color: red;
+    background-color: lightsalmon;
     height: 100%;
 }
 
@@ -89,11 +89,6 @@ header {
     border-left: 3px solid transparent;
 }
 
-.project > img {
-    height: 25px;
-    padding-right: 5px;
-}
-
 .nameWrapper > img,
 .formWrapper > img {
     height: 30px;
@@ -102,7 +97,11 @@ header {
 
 /* make trash icon invisible until project div is hovered over */
 .project .trashIcon {
+    height: 25px;
     display: none;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 5px;
     }
 
 .project:hover .trashIcon {
@@ -113,10 +112,16 @@ header {
 .trashIcon:hover {
     display: block;
     opacity: 1.0 !important;
+    background-color: rgb(211, 211, 211, .5);
 }
 
-.project:hover {
+/* .project:hover {
     border-left: 3px solid aquamarine;
+} */
+
+.project:hover .nameWrapper {
+    background-color: rgb(211, 211, 211, .5);
+    opacity: 1;
 }
 
 .nameWrapper {
@@ -124,28 +129,35 @@ header {
     justify-content: space-between;
     align-items: center;
     font-size: 25px;
+    padding: 5px;
+    padding-right: 10px;
+    border-radius: 20px;
+    opacity: 0.65;
 }
 
 .project_adder {
     display: flex;
+    width: fit-content;
     justify-content: left;
     align-items: center;
     cursor: pointer;
     font-size: 20px;
-    padding: 5px;
+    padding: 5px 10px 5px 0px;
     opacity: 0.65;
     border-left: 3px solid transparent;
+    margin-left: 10px;
+    border-radius: 15px;
 }
 
 .project_adder img {
     width: 20px;
     padding-right: 5px;
-    padding-left: 10px;
+    padding-left: 5px;
 }
 
 .project_adder:hover {
     opacity: 1.0;
-    border-left: 3px solid aquamarine;
+    background-color: rgb(211, 211, 211, .5);
 }
 
 /* new project form styling */
@@ -163,7 +175,7 @@ header {
     border-left: 3px solid transparent;
     height: var(--projheight);
     font-size: 25px;
-    background-color: red;
+    background-color: lightsalmon;
     z-index: 10;
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

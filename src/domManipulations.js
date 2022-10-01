@@ -2,14 +2,9 @@ import projImg from './assets/projectLogo.png';
 import trashImg from './assets/trash.png';
 import acceptImg from './assets/check.png';
 import cancelImg from './assets/cancel.png';
+import {createProject} from './index';
 
-export let createProjectElement = function (arg) {
-
-    //set name to either a passed input (if given) or else the value of a form input
-
-    let name = typeof(arg) === 'string'
-    ? arg
-    : document.getElementById('projectNameField').value;
+export let createProjectElement = function (name) {
 
     //create div for project DOM element
     let newProject = document.createElement('div');
@@ -80,7 +75,7 @@ export let createProjectForm = function () {
     //add enter key listener to text input
     formInput.addEventListener('keypress', function (e){
         if (e.key === 'Enter') {
-            createProjectElement();
+            createProject();
         }
     });
 
@@ -95,7 +90,7 @@ export let createProjectForm = function () {
     let acceptIcon = document.createElement('img');
     acceptIcon.src = acceptImg;
     acceptIcon.setAttribute('class', 'acceptIcon');
-    acceptIcon.addEventListener('click', createProjectElement);
+    acceptIcon.addEventListener('click', createProject);
     acceptCancelWrapper.appendChild(acceptIcon);
 
     //add cancel icon to project div
@@ -114,7 +109,7 @@ export let createProjectForm = function () {
     document.getElementById('projectNameField').focus();
 }
 
-let addProjectFormListener = function () {
+export let addProjectFormListener = function () {
     const project_adder = document.getElementsByClassName('project_adder');
     project_adder[0].addEventListener('click', createProjectForm);
 }
@@ -125,5 +120,3 @@ let removeProjectForm = function () {
     let overlay = document.getElementById('overlay')
     overlay.classList.remove('active');
 }
-
-addProjectFormListener();

@@ -1,21 +1,18 @@
 import css from "./main.css";
-import {createProjectElement, createProjectForm} from "./domManipulations"
-import {projectLibrary, createProject, createTodo} from "./objects"
+import {createProjectElement, createProjectForm, addProjectFormListener} from "./domManipulations"
+import {projectLibrary, createProjectObject, createTodoObject} from "./objects"
 
+export const createProject = function (arg) {
 
+    //set name to either a passed arg (if given) 
+    //or else the value of a form input
+    let name = typeof(arg) === 'string'
+    ? arg
+    : document.getElementById('projectNameField').value;
+
+    createProjectObject(name);
+    createProjectElement(name);
+};
+
+addProjectFormListener();
 createProject('todos');
-
-// let clarkProject = createProject('clark');
-
-// createTodo(brettProject, 'cheryl', 'lorem ipsum', '12/01/22', 'high');
-// createTodo(brettProject, 'dark clark', 'lorem ipsum', '11/01/22', 'low');
-
-// createProjectForm();
-
-// console.log(brettProject);
-
-
-// projectLibrary.removeProject(brettProject);
-
-
-// Function that generates new todo item
