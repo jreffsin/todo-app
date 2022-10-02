@@ -219,9 +219,87 @@ header {
     bottom: 0;
     background-color: rgba(0, 0, 0, .5);
     pointer-events: none;
+    transition: 200ms ease-in-out;
 }
 
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+    transition: 200ms ease-in-out;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px 15px 30px;
+    font-size: 25px;
+}
+
+.modal-header .close-button {
+    height: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    padding: 5px;
+}
+
+.modal-header > .close-button:hover {
+    background-color: rgb(211, 211, 211, .5);
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 30px 30px 30px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.modal-buttons button {
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.cancel-button {
+    margin-right: 10px;
+    background: none;
+}
+
+.cancel-button:hover {
+    background-color: rgb(211, 211, 211, .5);
+}
+
+.delete-button {
+    background-color: rgb(26, 115, 232);
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: rgb(26, 115, 232, .75);
 }

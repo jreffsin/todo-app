@@ -32,6 +32,7 @@ export let createProjectElement = function (name) {
     let trashIcon = document.createElement('img');
     trashIcon.src = trashImg;
     trashIcon.setAttribute('class', 'trashIcon');
+    trashIcon.addEventListener('click', () => openModal('removeProjectModal'));
     newProject.appendChild(trashIcon);
 
     //append project div to active_project element
@@ -48,7 +49,7 @@ export let createProjectElement = function (name) {
 export let createProjectForm = function () {
 
     //activate overlay
-    overlay.classList.add('active');
+    toggleOverlay();
 
     //create div for form DOM element
     let newProjectForm = document.createElement('div');
@@ -117,6 +118,37 @@ export let addProjectFormListener = function () {
 let removeProjectForm = function () {
     const newProjectForm = document.getElementsByClassName('newProjectForm');
     newProjectForm[0].parentNode.removeChild(newProjectForm[0]);
-    let overlay = document.getElementById('overlay')
-    overlay.classList.remove('active');
+    toggleOverlay();
 }
+
+let openModal = function (type) {
+    let modal = document.getElementById(type);
+    modal.classList.add('active');
+    toggleOverlay();
+}
+
+let closeModal = function (e) {
+
+    e.target.closest('.modal').classList.remove('active');
+    toggleOverlay();
+};
+
+let toggleOverlay = function() {
+    let overlay = document.getElementById('overlay');
+    if (overlay.classList.contains('active')){
+        overlay.classList.remove('active');
+        return;
+    }
+    overlay.classList.add('active');
+}
+
+let initModals = function() {
+
+    //bind click event handlers to modal close buttons
+    let closeButtons = document.getElementsByClassName('close-button');
+    for (let i = 0; i < closeButtons.length; i++){
+        closeButtons[i].addEventListener('click', closeModal);
+    };
+}
+
+initModals();
