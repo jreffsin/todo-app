@@ -51,6 +51,13 @@ table {
 
 :root {
     --projheight: 50px;
+    --sidebarColor: #d6d6d6;
+    --hoverHighlight: rgba(172, 172, 172, 0.5);
+    --modalHoverHighlight: rgba(172, 172, 172, 0.5);
+    
+    /* --sidebarColor: #bfbebe; */
+    /* --hoverHighlight: rgba(211, 211, 211, 0.5); */
+    /* --modalHoverHighlight: rgb(211, 211, 211, .5); */
 }
 
 body {
@@ -70,8 +77,19 @@ header {
 }
 
 .sidebar {
-    background-color: lightsalmon;
+    background-color: var(--sidebarColor);
     height: 100%;
+}
+
+.projects-header {
+    /* height: var(--projheight); */
+    height: 30px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 30px;
+    color: black;
+    cursor: default;
 }
 
 .content_wrapper {
@@ -112,11 +130,11 @@ header {
 .trashIcon:hover {
     display: block;
     opacity: 1.0 !important;
-    background-color: rgb(211, 211, 211, .5);
+    background-color: var(--hoverHighlight);
 }
 
 .project:hover .nameWrapper {
-    background-color: rgb(211, 211, 211, .5);
+    background-color: var(--hoverHighlight);
     opacity: 1;
 }
 
@@ -154,7 +172,7 @@ header {
 
 .project_adder:hover {
     opacity: 1.0;
-    background-color: rgb(211, 211, 211, .5);
+    background-color: var(--hoverHighlight);
 }
 
 /* new project form styling */
@@ -172,7 +190,7 @@ header {
     border-left: 3px solid transparent;
     height: var(--projheight);
     font-size: 25px;
-    background-color: lightsalmon;
+    background-color: var(--sidebarColor);
     z-index: 10;
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -196,7 +214,7 @@ header {
 }
 
 .acceptCancelWrapper > img:hover {
-    background-color: rgb(211, 211, 211, .5);
+    background-color: var(--hoverHighlight);
 }
 
 .projectInput {
@@ -258,7 +276,7 @@ header {
 }
 
 .modal-header > .close-button:hover {
-    background-color: rgb(211, 211, 211, .5);
+    background-color: var(--modalHoverHighlight);
 }
 
 .modal-body {
@@ -289,7 +307,7 @@ header {
 }
 
 .cancel-button:hover {
-    background-color: rgb(211, 211, 211, .5);
+    background-color: var(--modalHoverHighlight);
 }
 
 .delete-button {

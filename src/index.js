@@ -28,5 +28,5 @@ export const deleteProject = function (e) {
 };
 
 addProjectFormListener();
-createProject('todos');
+createProject("To-Do's");
 initModals();
