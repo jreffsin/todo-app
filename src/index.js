@@ -1,5 +1,5 @@
 import css from "./main.css";
-import {createProjectElement, createProjectForm, addProjectFormListener} from "./domManipulations"
+import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal} from "./domManipulations"
 import {projectLibrary, createProjectObject, createTodoObject} from "./objects"
 
 export const createProject = function (arg) {
@@ -10,9 +10,23 @@ export const createProject = function (arg) {
     ? arg
     : document.getElementById('projectNameField').value;
 
-    createProjectObject(name);
-    createProjectElement(name);
+    let id = createProjectObject(name);
+    createProjectElement(name, id);
+};
+
+export const deleteProject = function (e) {
+    //remove target project element from DOM
+    removeProjectElem();
+
+    //remove project object from projectLibrary
+    delete projectLibrary.library[projectLibrary.editing];
+
+    closeModal(e);
+
+    //reset projectLibrary.editing
+    projectLibrary.editing = -1;
 };
 
 addProjectFormListener();
 createProject('todos');
+initModals();

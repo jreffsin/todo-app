@@ -2,13 +2,15 @@ import projImg from './assets/projectLogo.png';
 import trashImg from './assets/trash.png';
 import acceptImg from './assets/check.png';
 import cancelImg from './assets/cancel.png';
-import {createProject} from './index';
+import {createProject, deleteProject} from './index';
+import { projectLibrary } from './objects';
 
-export let createProjectElement = function (name) {
+export const createProjectElement = function (name, id) {
 
     //create div for project DOM element
     let newProject = document.createElement('div');
-    newProject.setAttribute('id', `${name}`);
+    // newProject.setAttribute('id', `${id}`);
+    newProject.dataset.projectId = id;
     newProject.setAttribute('class', 'project');
 
     //create div for project name and icon wrapper
@@ -32,7 +34,7 @@ export let createProjectElement = function (name) {
     let trashIcon = document.createElement('img');
     trashIcon.src = trashImg;
     trashIcon.setAttribute('class', 'trashIcon');
-    trashIcon.addEventListener('click', () => openModal('removeProjectModal'));
+    trashIcon.addEventListener('click', openRemProjModal);
     newProject.appendChild(trashIcon);
 
     //append project div to active_project element
@@ -46,7 +48,7 @@ export let createProjectElement = function (name) {
     overlay.classList.remove('active');
 }
 
-export let createProjectForm = function () {
+export const createProjectForm = function () {
 
     //activate overlay
     toggleOverlay();
@@ -110,45 +112,70 @@ export let createProjectForm = function () {
     document.getElementById('projectNameField').focus();
 }
 
-export let addProjectFormListener = function () {
+export const addProjectFormListener = function () {
     const project_adder = document.getElementsByClassName('project_adder');
     project_adder[0].addEventListener('click', createProjectForm);
 }
 
-let removeProjectForm = function () {
+const removeProjectForm = function () {
     const newProjectForm = document.getElementsByClassName('newProjectForm');
     newProjectForm[0].parentNode.removeChild(newProjectForm[0]);
     toggleOverlay();
 }
 
-let openModal = function (type) {
-    let modal = document.getElementById(type);
+const openRemProjModal = function (e) {
+    let modal = document.getElementById('removeProjectModal');
+    
+    //get targeted project id by accessing id of button's parent
+    //set the currently editing attribute of project library to the target project id
+    let parent = e.target.parentNode
+    projectLibrary.editing = parent.dataset.projectId;
+
+    //get project name by accessing div under parent and then the value of p element under that
+    let projName = parent.getElementsByClassName('nameWrapper')[0].querySelector('p').innerHTML;
+
+    //access text copy of modal and pass project name into copy with delete message
+    modal.querySelectorAll('.modal-copy')[0].innerHTML = `Delete the project "${projName}"?`;
+
     modal.classList.add('active');
     toggleOverlay();
-}
+};
 
-let closeModal = function (e) {
-
+export const closeModal = function (e) {
     e.target.closest('.modal').classList.remove('active');
     toggleOverlay();
 };
 
-let toggleOverlay = function() {
+const toggleOverlay = function() {
     let overlay = document.getElementById('overlay');
     if (overlay.classList.contains('active')){
         overlay.classList.remove('active');
         return;
     }
     overlay.classList.add('active');
-}
+};
 
-let initModals = function() {
+export const initModals = function() {
 
     //bind click event handlers to modal close buttons
     let closeButtons = document.getElementsByClassName('close-button');
     for (let i = 0; i < closeButtons.length; i++){
         closeButtons[i].addEventListener('click', closeModal);
     };
+
+    //bind click event to delete button on remove project modal
+    let remProjDelButton = document.getElementById('remProjDelButton');
+    remProjDelButton.addEventListener('click', (e) => deleteProject(e));
+
 }
 
-initModals();
+export const removeProjectElem = function () {
+
+    //set projectID to the ID of the project that's flagged as editing in
+    //projectLibrary object
+    let projectID = projectLibrary.editing
+
+    //delete DOM element with class project and ID equal to projectID
+    let element = document.querySelector(`[data-project-id='${projectID}']`);
+    element.remove();
+}

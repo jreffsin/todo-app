@@ -4,25 +4,12 @@ const Project = function (projectName) {
     let id = projectLibrary.assignId();
 
     let todoLibrary = {
-
         idCounter: -1,
-        library: [],
-        add: function (todoItem) {
-            this.library.push(todoItem);
-        },
-        remove: function(todoItem) {
-            for(let i = 0; i < this.library.length; i++){
-                if (this.library[i].id === todoItem.id){
-                    this.library.splice(i, 1);
-                    break;
-                };
-            };
-        },
+        library: {},
         assignId: function () {
             this.idCounter++;
             return this.idCounter;
         }
-    
     };
 
     return {name, id, todoLibrary};
@@ -45,30 +32,20 @@ const Todo = function (project, todoName, todoDescription, todoDueDate, todoPrio
 };
 
 export let projectLibrary = {
-
     idCounter: -1,
-    library: [],
-    addProject: function (project) {
-        this.library.push(project);
-    },
-    removeProject: function(project) {
-        for(let i = 0; i < this.library.length; i++){
-            if (this.library[i].id === project.id){
-                this.library.splice(i, 1);
-                break;
-            };
-        };
-    },
+    library: {},
+    editing: -1,
     assignId: function () {
         this.idCounter++;
         return this.idCounter;
     }
-
 };
 
 export const createProjectObject = function (projectName) {
     let project = Project(projectName);
-    projectLibrary.addProject(project);
+    // projectLibrary.addProject(project);
+    projectLibrary.library[project.id] = project;
+    return project.id
 };
 
 export const createTodoObject = function (project, name, description, dueDate, priority) {
