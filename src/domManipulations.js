@@ -1,19 +1,19 @@
 import projImg from './assets/projectLogo.png';
 import trashImg from './assets/trash.png';
+import editImg from './assets/edit.png';
 import acceptImg from './assets/check.png';
 import cancelImg from './assets/cancel.png';
-import {createProject, deleteProject} from './index';
+import {createProject, deleteProject, editProject} from './index';
 import { projectLibrary } from './objects';
 
 export const createProjectElement = function (name, id) {
 
     //create div for project DOM element
     let newProject = document.createElement('div');
-    // newProject.setAttribute('id', `${id}`);
     newProject.dataset.projectId = id;
     newProject.setAttribute('class', 'project');
 
-    //create div for project name and icon wrapper
+    //create wrapper for project name and icon
     let projectNameWrapper = document.createElement('div');
     projectNameWrapper.setAttribute('class', 'nameWrapper');
 
@@ -30,12 +30,25 @@ export const createProjectElement = function (name, id) {
     //add project name and icon wrapper div to new project div
     newProject.appendChild(projectNameWrapper);
 
+    //create wrapper for edit and trash icons
+    let iconWrapper = document.createElement('div');
+    iconWrapper.setAttribute('class', 'projectIconWrapper');
+    newProject.appendChild(iconWrapper);
+
+
+    //add edit icon to project div
+    let editIcon = document.createElement('img');
+    editIcon.src = editImg;
+    editIcon.setAttribute('class', 'editIcon');
+    editIcon.addEventListener('click', e => addEditProjectElem(e));
+    iconWrapper.appendChild(editIcon);
+
     //add trash icon to project div
     let trashIcon = document.createElement('img');
     trashIcon.src = trashImg;
     trashIcon.setAttribute('class', 'trashIcon');
     trashIcon.addEventListener('click', openRemProjModal);
-    newProject.appendChild(trashIcon);
+    iconWrapper.appendChild(trashIcon);
 
     //append project div to active_project element
     document.querySelector('.active_projects').appendChild(newProject);
@@ -46,7 +59,7 @@ export const createProjectElement = function (name, id) {
     };
 
     overlay.classList.remove('active');
-}
+};
 
 export const createProjectForm = function () {
 
@@ -110,25 +123,97 @@ export const createProjectForm = function () {
 
     //focus cursor on text input
     document.getElementById('projectNameField').focus();
-}
+};
+
+const createEditProjectForm = function (element) {
+    //activate overlay
+    toggleOverlay();
+
+    //create div for form DOM element
+    let newProjectForm = document.createElement('div');
+    newProjectForm.setAttribute('class', 'newProjectForm');
+
+    //create div for form input and icon wrapper
+    let formWrapper = document.createElement('div');
+    formWrapper.setAttribute('class', 'formWrapper');
+
+    //add project logo to form
+    let formIcon = document.createElement('img');
+    formIcon.src = projImg;
+    formWrapper.appendChild(formIcon);
+
+    //add text input field to form
+    let formInput = document.createElement('input');
+    formInput.setAttribute('class', 'projectInput');
+    formInput.id = 'projectNameField';
+    formInput.setAttribute = ('type', 'text');
+    formInput.value = projectLibrary.library[projectLibrary.editing].name; //set form value to the name of project that's currently being edited
+    formInput.maxLength = '10';
+    formWrapper.appendChild(formInput);
+
+    //add enter key listener to text input
+    formInput.addEventListener('keypress', function (e){
+        if (e.key === 'Enter') {
+            editProject();
+        }
+    });
+
+    //add formWrapper to new project div
+    newProjectForm.appendChild(formWrapper);
+
+    //create wrapper for accept/cancel icons
+    let acceptCancelWrapper = document.createElement('div');
+    acceptCancelWrapper.setAttribute('class', 'acceptCancelWrapper');
+
+    //add accept icon to project div
+    let acceptIcon = document.createElement('img');
+    acceptIcon.src = acceptImg;
+    acceptIcon.setAttribute('class', 'acceptIcon');
+    acceptIcon.addEventListener('click', editProject);
+    acceptCancelWrapper.appendChild(acceptIcon);
+
+    //add cancel icon to project div
+    let cancelIcon = document.createElement('img');
+    cancelIcon.src = cancelImg;
+    cancelIcon.setAttribute('class', 'cancelIcon');
+    cancelIcon.addEventListener('click', removeEditProjectForm);
+    acceptCancelWrapper.appendChild(cancelIcon);
+
+    //append accept & cancel wrapper to new project form
+    //append new project div to active_project element
+    newProjectForm.appendChild(acceptCancelWrapper);
+    // document.querySelector('.active_projects').appendChild(newProjectForm);
+    document.querySelector('.active_projects').insertBefore(newProjectForm, element);
+
+    //focus cursor on text input
+    document.getElementById('projectNameField').focus();
+};
 
 export const addProjectFormListener = function () {
     const project_adder = document.getElementsByClassName('project_adder');
     project_adder[0].addEventListener('click', createProjectForm);
-}
+};
 
 const removeProjectForm = function () {
     const newProjectForm = document.getElementsByClassName('newProjectForm');
     newProjectForm[0].parentNode.removeChild(newProjectForm[0]);
     toggleOverlay();
-}
+};
+
+const removeEditProjectForm = function () {
+    const newProjectForm = document.getElementsByClassName('newProjectForm');
+    newProjectForm[0].parentNode.removeChild(newProjectForm[0]);
+    let parent = document.querySelector(`[data-project-id='${projectLibrary.editing}']`); //select project element that's currently being edited
+    parent.style.display = 'flex'; //show project div
+    toggleOverlay();
+};
 
 const openRemProjModal = function (e) {
     let modal = document.getElementById('removeProjectModal');
     
     //get targeted project id by accessing id of button's parent
     //set the currently editing attribute of project library to the target project id
-    let parent = e.target.parentNode
+    let parent = e.target.parentNode.parentNode;
     projectLibrary.editing = parent.dataset.projectId;
 
     //get project name by accessing div under parent and then the value of p element under that
@@ -167,7 +252,7 @@ export const initModals = function() {
     let remProjDelButton = document.getElementById('remProjDelButton');
     remProjDelButton.addEventListener('click', (e) => deleteProject(e));
 
-}
+};
 
 export const removeProjectElem = function () {
 
@@ -178,4 +263,18 @@ export const removeProjectElem = function () {
     //delete DOM element with class project and ID equal to projectID
     let element = document.querySelector(`[data-project-id='${projectID}']`);
     element.remove();
-}
+};
+
+const addEditProjectElem = function (e) {
+    let parent = e.target.parentNode.parentNode; //target the containing project div
+    projectLibrary.editing = parent.dataset.projectId //set project as currently editing
+    parent.style.display = 'none'; //hide project div
+    createEditProjectForm(parent);
+};
+
+export const editProjectElem = function () {
+    let parent = document.querySelector(`[data-project-id='${projectLibrary.editing}']`); //select project element that's currently being edited
+    parent.querySelector('p').innerHTML = `${projectLibrary.library[projectLibrary.editing].name}`; //change display name of project to whatever's listed in object storage
+    parent.style.display = 'flex'; //show project div
+    removeProjectForm(); //remove edit project div
+};

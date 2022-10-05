@@ -54,7 +54,7 @@ table {
     --sidebarColor: #d6d6d6;
     --hoverHighlight: rgba(172, 172, 172, 0.5);
     --modalHoverHighlight: rgba(172, 172, 172, 0.5);
-    
+
     /* --sidebarColor: #bfbebe; */
     /* --hoverHighlight: rgba(211, 211, 211, 0.5); */
     /* --modalHoverHighlight: rgb(211, 211, 211, .5); */
@@ -107,6 +107,12 @@ header {
     border-left: 3px solid transparent;
 }
 
+.projectIconWrapper {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
 .nameWrapper > img,
 .formWrapper > img {
     height: 30px;
@@ -114,7 +120,8 @@ header {
 }
 
 /* make trash icon invisible until project div is hovered over */
-.project .trashIcon {
+.project .trashIcon,
+.project .editIcon {
     height: 25px;
     display: none;
     border-radius: 50%;
@@ -122,12 +129,18 @@ header {
     margin-right: 5px;
     }
 
-.project:hover .trashIcon {
+.project .editIcon {
+    margin-right: 0px;
+}
+
+.project:hover .trashIcon,
+.project:hover .editIcon {
       display: block;
       opacity: 0.4;
     }
 
-.trashIcon:hover {
+.trashIcon:hover,
+.editIcon:hover {
     display: block;
     opacity: 1.0 !important;
     background-color: var(--hoverHighlight);
