@@ -95,6 +95,10 @@ header {
 .content_wrapper {
     background-color: green;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 30px;
 }
 
 .project {
@@ -330,4 +334,23 @@ header {
 
 .delete-button:hover {
     background-color: rgb(26, 115, 232, .75);
+}
+
+.todo-item {
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo-left-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.todo-right-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
 }

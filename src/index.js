@@ -35,3 +35,8 @@ export const editProject = function () {
 addProjectFormListener();
 createProject("To-Do's");
 initModals();
+
+//todo - set project title = to project name (and update on changes) so that
+//hover will cause tooltip to popup with full title listed
+
+//use classlist.toggle() on my toggleOverlay function to toggle the active class
