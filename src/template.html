@@ -13,8 +13,7 @@
 
 </head>
 <body>
-    <header>
-    </header>
+    <header><h1>To-Do Lists</h1></header>
 
     <div class="sidebar">
         <div class="projects-header">Projects</div>
@@ -26,18 +25,18 @@
     </div>
     <div class="content_wrapper">
 
+        <div class="todos-header">Items</div>
         <div class="todo-item">
             <div class="todo-left-wrapper">
                 <input type="checkbox">
                 <p class="todo-name">Test</p>
             </div>
             <div class="todo-right-wrapper">
-                <p class="todo-due-date">test date</p>
-                <img class="todo-edit-icon" src="./assets/edit.png">
-                <img class="todo-trash-icon" src="./assets/trash.png">
+                <img title="Edit" class="todo-edit-icon" src="./assets/edit.png">
+                <img title="Delete" class="todo-trash-icon" src="./assets/trash.png">
             </div>
         </div>
-        
+
     </div>
 
     <div id="overlay"></div>
@@ -52,6 +51,33 @@
             <div class="modal-buttons">
                 <button class="cancel-button close-button">Cancel</button>
                 <button class="delete-button" id="remProjDelButton">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="createTodoModal">
+        <div class="modal-header">
+            <div class="modal-title">Create to-do item</div>
+            <img src="./assets/cancel.png" class="close-button">
+        </div>
+        <div class="modal-body">
+            <form id="todo-create-form">
+                <label for="todo-name">Name*</label> 
+                <input id="todo-name" name="todo-name" type="text" autocomplete="off">
+                <label for="todo-description">Description</label>
+                <textarea id="todo-description" name="todo-description" cols="40" rows="4" autocomplete="off"></textarea>
+                <label for="todo-due">Due</label>
+                <input type="date" id="todo-due" name="todo-due">
+                <label for="low-priority" id="todo-priority">Priority</label>
+                <div id="priority-buttons">
+                    <button id="low-priority">Low</button>
+                    <button id="med-priority">Medium</button>
+                    <button id="high-priority">High</button>
+                </div>
+            </form>
+            <div class="modal-buttons">
+                <button class="cancel-button close-button">Cancel</button>
+                <button class="action-button" id="createTodoButton">Create</button>
             </div>
         </div>
     </div>
