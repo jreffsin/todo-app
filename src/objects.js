@@ -35,6 +35,7 @@ export let projectLibrary = {
     idCounter: -1,
     library: {},
     editing: -1,
+    active: -1,
     assignId: function () {
         this.idCounter++;
         return this.idCounter;

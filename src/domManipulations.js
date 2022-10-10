@@ -3,7 +3,7 @@ import trashImg from './assets/trash.png';
 import editImg from './assets/edit.png';
 import acceptImg from './assets/check.png';
 import cancelImg from './assets/cancel.png';
-import {createProject, deleteProject, editProject} from './index';
+import {createProject, deleteProject, editProject, setActiveProject} from './index';
 import { projectLibrary } from './objects';
 
 export const createProjectElement = function (name, id) {
@@ -49,6 +49,9 @@ export const createProjectElement = function (name, id) {
     trashIcon.setAttribute('class', 'trashIcon');
     trashIcon.addEventListener('click', openRemProjModal);
     iconWrapper.appendChild(trashIcon);
+
+    //add active project listener
+    addSetActiveProjectListener(newProject);
 
     //append project div to active_project element
     document.querySelector('.active_projects').appendChild(newProject);
@@ -224,6 +227,9 @@ const openRemProjModal = function (e) {
 
     modal.classList.add('active');
     toggleOverlay();
+
+    e.stopImmediatePropagation();
+    console.log(projectLibrary);
 };
 
 export const closeModal = function (e) {
@@ -270,6 +276,7 @@ const addEditProjectElem = function (e) {
     projectLibrary.editing = parent.dataset.projectId //set project as currently editing
     parent.style.display = 'none'; //hide project div
     createEditProjectForm(parent);
+    e.stopImmediatePropagation();
 };
 
 export const editProjectElem = function () {
@@ -278,3 +285,20 @@ export const editProjectElem = function () {
     parent.style.display = 'flex'; //show project div
     removeProjectForm(); //remove edit project div
 };
+
+const addSetActiveProjectListener = function (projectElement) {
+    projectElement.addEventListener('click', setActiveProject)
+};
+
+export const removeActiveProjectElementToggle = function () {
+    if (projectLibrary.active === -1){
+        return
+    }
+    let element = document.querySelector(`[data-project-id='${projectLibrary.active}']`)
+    element.classList.remove('activeProject');
+}
+
+export const addActiveProjectElementToggle = function () {
+    let element = document.querySelector(`[data-project-id='${projectLibrary.active}']`)
+    element.classList.add('activeProject');
+}

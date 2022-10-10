@@ -1,5 +1,5 @@
 import css from "./main.css";
-import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem} from "./domManipulations"
+import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle} from "./domManipulations"
 import {projectLibrary, createProjectObject, createTodoObject} from "./objects"
 
 export const createProject = function (arg) {
@@ -32,11 +32,47 @@ export const editProject = function () {
     editProjectElem();
 };
 
+export const setActiveProject = function (e) {
+    removeActiveProjectElementToggle();
+    let target = getEventContainingDiv(e);
+    updateActiveInProjectLibrary(e, target);
+    addActiveProjectElementToggle();
+}
+
+const getEventContainingDiv = function (e) {
+    //if event is passed in, returns project div that captured click
+    if (e === 0) {
+        return 0;
+    }
+    let target = e.target;
+    while (target.dataset.projectId === undefined) {
+        target = target.parentNode
+    }
+    return target;
+}
+
+const updateActiveInProjectLibrary = function (e, target) {
+    projectLibrary.active = e === 0 ? 0 : target.dataset.projectId;
+}
+
+export const setProjectBeingEdited = function (id) {
+    projectLibrary.editing = id;
+};
+
+export const createTodo = function () {
+    //open modal
+    //
+};
+
 addProjectFormListener();
 createProject("To-Do's");
+setActiveProject(0);
 initModals();
 
-//todo - set project title = to project name (and update on changes) so that
+//todo: 
+//design and implement behavior for when user deletes active project
+
+//set project title = to project name (and update on changes) so that
 //hover will cause tooltip to popup with full title listed
 
-//use classlist.toggle() on my toggleOverlay function to toggle the active class
+//use classlist.toggle() on toggleOverlay function to toggle the active class

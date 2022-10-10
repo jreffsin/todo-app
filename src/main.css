@@ -161,7 +161,8 @@ h1 {
     background-color: var(--hoverHighlight);
 }
 
-.project:hover .nameWrapper {
+.project:hover .nameWrapper, 
+.activeProject .nameWrapper{
     background-color: var(--hoverHighlight);
     opacity: 1;
 }
@@ -390,9 +391,32 @@ h1 {
     width: min-content;
 }
 
-#priority-buttons {
+#priority-buttons-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 160px;
+    width: 200px;
+}
+
+/* #createTodoModal {
+    transform: translate(-50%, -50%) scale(1);
+} */
+
+.priority-button {
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+#low-priority {
+    background-color: green;
+}
+
+#med-priority {
+    background-color: orange;
+}
+
+#high-priority {
+    background-color: red;
 }
