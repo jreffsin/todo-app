@@ -324,9 +324,10 @@ export const addPriorityButtonsEventListeners = function () {
 }
 
 export const setPriorityButton = function (e) {
+    let untoggleAndExit = false;
+    if (e.target.classList.contains('active')) untoggleAndExit = true
     let priorityButtons = document.querySelectorAll('.priority-button');
-    priorityButtons.forEach((button) => {
-        if (button.classList.contains('active')) button.classList.remove('active')
-    })
+    priorityButtons.forEach((button) => button.classList.remove('active'))
+    if (untoggleAndExit) return
     e.target.classList.add('active');
 }
