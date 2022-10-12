@@ -23,9 +23,10 @@ const Todo = function (project, todoName, todoDescription, todoDueDate, todoPrio
     let dueDate = todoDueDate;
     let priority = todoPriority;
     let id = project.todoLibrary.assignId();
+    let completed = false;
 
     return {
-        name, description, dueDate, priority, id
+        name, description, dueDate, priority, id, completed
     }
 
 

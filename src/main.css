@@ -110,6 +110,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    position: relative;
 }
 
 .project {
@@ -178,7 +179,8 @@ h1 {
     opacity: 0.65;
 }
 
-.project_adder {
+.project_adder,
+.todo_adder {
     display: flex;
     width: fit-content;
     justify-content: left;
@@ -193,13 +195,15 @@ h1 {
     margin-top: 5px;
 }
 
-.project_adder img {
+.project_adder img,
+.todo_adder img {
     width: 20px;
     padding-right: 5px;
     padding-left: 5px;
 }
 
-.project_adder:hover {
+.project_adder:hover,
+.todo_adder:hover {
     opacity: 1.0;
     background-color: var(--hoverHighlight);
 }
@@ -398,9 +402,9 @@ h1 {
     width: 200px;
 }
 
-/* #createTodoModal {
+#createTodoModal.active {
     transform: translate(-50%, -50%) scale(1);
-} */
+}
 
 .priority-button {
     padding: 5px 10px;
@@ -419,4 +423,26 @@ h1 {
 
 #high-priority {
     background-color: red;
+}
+
+#no-project-wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#no-project-wrapper h2 {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#no-project-wrapper p {
+    font-size: 20px;
+    margin-top: 15px;
 }

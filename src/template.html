@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <header><h1>To-Do Lists</h1></header>
+    <header><h1>To-Doodlr</h1></header>
 
     <div class="sidebar">
         <div class="projects-header">Projects</div>
@@ -35,6 +35,15 @@
                 <img title="Edit" class="todo-edit-icon" src="./assets/edit.png">
                 <img title="Delete" class="todo-trash-icon" src="./assets/trash.png">
             </div>
+        </div>
+        <div class="todo_adder">
+            <img src="./assets/add.png" class="addIcon">
+            <p>New To-Do Item</p>
+        </div>
+
+        <div id="no-project-wrapper">
+            <h2 id="no-project-title">No Project Selected</h2>
+            <p id="no-project-text">Select a project to see items here</p>
         </div>
 
     </div>
@@ -62,13 +71,13 @@
         </div>
         <div class="modal-body">
             <form id="todo-create-form">
-                <label for="todo-name">Name*</label> 
+                <label for="todo-name">Name*:</label> 
                 <input id="todo-name" name="todo-name" type="text" autocomplete="off">
-                <label for="todo-description">Description</label>
+                <label for="todo-description">Description:</label>
                 <textarea id="todo-description" name="todo-description" cols="40" rows="4" autocomplete="off"></textarea>
-                <label for="todo-due">Due</label>
+                <label for="todo-due">Due:</label>
                 <input type="date" id="todo-due" name="todo-due">
-                <label for="low-priority" id="todo-priority">Priority</label>
+                <label for="low-priority" id="todo-priority">Priority:</label>
                 <div id="priority-buttons-wrapper">
                     <button class="priority-button" id="low-priority">Low</button>
                     <button class="priority-button" id="med-priority">Medium</button>

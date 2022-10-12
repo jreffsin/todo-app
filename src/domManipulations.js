@@ -302,3 +302,14 @@ export const addActiveProjectElementToggle = function () {
     let element = document.querySelector(`[data-project-id='${projectLibrary.active}']`)
     element.classList.add('activeProject');
 }
+
+export const addTodoAdderListener = function () {
+    const todoAdder = document.querySelector('.todo_adder');
+    todoAdder.addEventListener('click', openAddTodoModal);
+};
+
+export const openAddTodoModal = function () {
+    let todoModal = document.querySelector('#createTodoModal');
+    todoModal.classList.add('active');
+    toggleOverlay();
+}
