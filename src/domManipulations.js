@@ -313,3 +313,20 @@ export const openAddTodoModal = function () {
     todoModal.classList.add('active');
     toggleOverlay();
 }
+
+export const getTodoData = function () {
+
+}
+
+export const addPriorityButtonsEventListeners = function () {
+    let priorityButtons = document.querySelectorAll('.priority-button');
+    priorityButtons.forEach((element) => element.addEventListener('click', (e) => setPriorityButton(e)))
+}
+
+export const setPriorityButton = function (e) {
+    let priorityButtons = document.querySelectorAll('.priority-button');
+    priorityButtons.forEach((button) => {
+        if (button.classList.contains('active')) button.classList.remove('active')
+    })
+    e.target.classList.add('active');
+}

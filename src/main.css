@@ -414,15 +414,42 @@ h1 {
 }
 
 #low-priority {
+    background-color: white;
+    color: green;
+    border: 1px solid green;
+    cursor: pointer;
+}
+
+#low-priority:hover,
+#low-priority.active {
     background-color: green;
+    color: white;
 }
 
 #med-priority {
+    background-color: white;
+    color: orange;
+    border: 1px solid orange;
+    cursor: pointer;
+}
+
+#med-priority:hover,
+#med-priority.active {
     background-color: orange;
+    color: white;
 }
 
 #high-priority {
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+#high-priority:hover, 
+#high-priority.active {
     background-color: red;
+    color: white;
 }
 
 #no-project-wrapper{
