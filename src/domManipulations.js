@@ -311,6 +311,7 @@ export const addTodoAdderListener = function () {
 export const openAddTodoModal = function () {
     let todoModal = document.querySelector('#createTodoModal');
     todoModal.classList.add('active');
+    document.getElementById('todo-name').focus();
     toggleOverlay();
 }
 
@@ -331,6 +332,14 @@ export const setPriorityButton = function (e) {
 export const addTodoSubmitListener = function () {
     let todoSubmitButton = document.querySelector('#createTodoButton')
     todoSubmitButton.addEventListener('click', (e) => createTodo(e))
+
+    let nameInput = document.querySelector('#todo-name');
+    nameInput.addEventListener('keypress', function (e){
+        if (e.key === 'Enter') {
+            createTodo(e);
+        }
+    });
+
 }
 
 export const getTodoValues = function () {
@@ -374,4 +383,14 @@ export const createTodoElement = function (id, name, priority) {
     contentWrapper.insertBefore(newTodoElement, todoAdder);
 
 
+}
+
+export const clearTodoInputFields = function () {
+    document.querySelector('#todo-name').value = ''
+    document.querySelector('#todo-description').value = ''
+    document.querySelector('#todo-description').value = ''
+    document.querySelector('#todo-due').value = ''
+
+    let priorityButtons = document.querySelectorAll('.priority-button');
+    priorityButtons.forEach((button) => button.classList.remove('active'))
 }
