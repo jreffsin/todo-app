@@ -3,7 +3,7 @@ import trashImg from './assets/trash.png';
 import editImg from './assets/edit.png';
 import acceptImg from './assets/check.png';
 import cancelImg from './assets/cancel.png';
-import {createProject, deleteProject, editProject, setActiveProject} from './index';
+import {createProject, deleteProject, editProject, setActiveProject, createTodo} from './index';
 import { projectLibrary } from './objects';
 
 export const createProjectElement = function (name, id) {
@@ -330,4 +330,25 @@ export const setPriorityButton = function (e) {
     priorityButtons.forEach((button) => button.classList.remove('active'))
     if (untoggleAndExit) return
     e.target.classList.add('active');
+}
+
+export const addTodoSubmitListener = function () {
+    let todoSubmitButton = document.querySelector('#createTodoButton')
+    todoSubmitButton.addEventListener('click', createTodo)
+}
+
+export const getTodoValues = function () {
+    let name = document.querySelector('#todo-name').value
+    let description = document.querySelector('#todo-description').value
+    let dueDate = document.querySelector('#todo-due').value
+
+    let priorityButtons = document.querySelectorAll('.priority-button')
+    let priority
+    priorityButtons.forEach((button) => {
+        if (button.classList.contains('active')){
+            priority = button.dataset.priorityLevel
+        }
+    })
+
+    return {name, description, dueDate, priority}
 }

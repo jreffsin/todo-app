@@ -1,5 +1,5 @@
 import css from "./main.css";
-import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners} from "./domManipulations"
+import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues} from "./domManipulations"
 import {projectLibrary, createProjectObject, createTodoObject} from "./objects"
 
 export const createProject = function (arg) {
@@ -70,14 +70,21 @@ export const setProjectBeingEdited = function (id) {
 export const createTodo = function () {
 
     //get values from modal
+    let todos = getTodoValues()
+    console.log(todos)
 
-    //
+    //create Todo object
+
+
+
+    //create Todo element
 };
 
 
 addProjectFormListener();
 addTodoAdderListener();
 addPriorityButtonsEventListeners();
+addTodoSubmitListener();
 createProject("To-Do's");
 setActiveProject(0);
 initModals();
