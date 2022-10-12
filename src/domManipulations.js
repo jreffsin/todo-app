@@ -314,10 +314,6 @@ export const openAddTodoModal = function () {
     toggleOverlay();
 }
 
-export const getTodoData = function () {
-
-}
-
 export const addPriorityButtonsEventListeners = function () {
     let priorityButtons = document.querySelectorAll('.priority-button');
     priorityButtons.forEach((element) => element.addEventListener('click', (e) => setPriorityButton(e)))
@@ -334,7 +330,7 @@ export const setPriorityButton = function (e) {
 
 export const addTodoSubmitListener = function () {
     let todoSubmitButton = document.querySelector('#createTodoButton')
-    todoSubmitButton.addEventListener('click', createTodo)
+    todoSubmitButton.addEventListener('click', (e) => createTodo(e))
 }
 
 export const getTodoValues = function () {
@@ -351,4 +347,31 @@ export const getTodoValues = function () {
     })
 
     return {name, description, dueDate, priority}
+}
+
+export const createTodoElement = function (id, name, priority) {
+    let baseTodoElement = document.querySelector('#base-todo-item');
+    let newTodoElement = baseTodoElement.cloneNode(true);
+    newTodoElement.removeAttribute('id');
+    newTodoElement.dataset.todoId = `${id}`;
+
+    let newTodoTitleElement = newTodoElement.querySelector('.todo-left-wrapper').querySelector('p')
+    newTodoTitleElement.innerText = `${name}`;
+
+    if (priority === 'low'){
+        newTodoElement.classList.add('lowPriority')
+    }
+    if (priority === 'medium'){
+        newTodoElement.classList.add('mediumPriority')
+    }
+    if (priority === 'high'){
+        newTodoElement.classList.add('highPriority')
+    }
+
+    let contentWrapper = document.querySelector('.content_wrapper');
+    let todoAdder = document.querySelector('.todo_adder');
+
+    contentWrapper.insertBefore(newTodoElement, todoAdder);
+
+
 }
