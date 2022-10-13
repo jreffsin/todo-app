@@ -91,10 +91,15 @@ header {
     cursor: default;
 }
 
+header img {
+    height: 50px;
+}
+
 h1 {
     font-size: 50px;
     color: white;
     margin-left: 10px;
+    font-family: 'Arvo', 'Inter', sans-serif;
 }
 
 .sidebar {
