@@ -1,5 +1,5 @@
 import css from "./main.css";
-import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues, createTodoElement, clearTodoInputFields} from "./domManipulations"
+import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues, createTodoElement, clearTodoInputFields, removeTodoElements, updateItemsTitle} from "./domManipulations"
 import {projectLibrary, createProjectObject, createTodoObject} from "./objects"
 
 export const createProject = function (arg) {
@@ -35,6 +35,7 @@ export const deleteProject = function (e) {
 export const editProject = function () {
     projectLibrary.library[projectLibrary.editing].name = document.getElementById('projectNameField').value; //update name of project in library to the entered value in edit form
     editProjectElem();
+    updateItemsTitle();
 };
 
 export const setActiveProject = function (e) {
@@ -42,9 +43,13 @@ export const setActiveProject = function (e) {
     let target = getEventContainingDiv(e);
     updateActiveInProjectLibrary(e, target);
     addActiveProjectElementToggle();
+
     //todo:
     //update title of items panel
-    //update contents of items panel
+    updateItemsTitle();
+
+    removeTodoElements();
+    populateTodoElements();
 }
 
 const getEventContainingDiv = function (e) {
@@ -74,7 +79,19 @@ export const createTodo = function (e) {
     createTodoElement(todo.id, todo.name, todo.priority);
     closeModal(e)
     clearTodoInputFields();
+    console.log(projectLibrary)
 };
+
+const populateTodoElements = function () {
+    let todoLibrary = projectLibrary.library[projectLibrary.active].todoLibrary
+    for (const key in todoLibrary){
+        let id = todoLibrary[key].id
+        let name = todoLibrary[key].name
+        let priority = todoLibrary[key].priority
+
+        createTodoElement(id, name, priority)
+    }
+}
 
 
 addProjectFormListener();

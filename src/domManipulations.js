@@ -361,6 +361,7 @@ export const getTodoValues = function () {
 export const createTodoElement = function (id, name, priority) {
     let baseTodoElement = document.querySelector('#base-todo-item');
     let newTodoElement = baseTodoElement.cloneNode(true);
+    newTodoElement.classList.add('activeTodo');
     newTodoElement.removeAttribute('id');
     newTodoElement.dataset.todoId = `${id}`;
 
@@ -393,4 +394,14 @@ export const clearTodoInputFields = function () {
 
     let priorityButtons = document.querySelectorAll('.priority-button');
     priorityButtons.forEach((button) => button.classList.remove('active'))
+}
+
+export const removeTodoElements = function () {
+    let activeTodoElements = document.querySelectorAll('.activeTodo')
+    activeTodoElements.forEach((element) => element.remove())
+}
+
+export const updateItemsTitle = function () {
+    let header = document.querySelector('.todos-header');
+    header.innerText = `Items in ${projectLibrary.library[projectLibrary.active].name}`
 }

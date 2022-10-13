@@ -53,8 +53,17 @@ table {
     --projheight: 50px;
     --sidebarColor: #d6d6d6;
     --contentColor: #eeeeee;
+
+    /* gray theme
     --hoverHighlight: rgba(172, 172, 172, 0.5);
-    --modalHoverHighlight: rgba(172, 172, 172, 0.5);
+    --modalHoverHighlight: rgba(172, 172, 172, 0.5); */
+
+    /* alternate blue
+    --hoverHighlight: #45869fdb; */
+
+    --hoverHighlight: #45869f76;
+    --modalHoverHighlight: #45869f76;
+
 
     /* --sidebarColor: #bfbebe; */
     /* --hoverHighlight: rgba(211, 211, 211, 0.5); */
@@ -356,7 +365,7 @@ h1 {
 }
 
 .todo-item {
-    height: 40px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -392,12 +401,14 @@ h1 {
 
 .todo-left-wrapper p {
     margin-left: 5px;
+    font-size: 18px;
 }
 
 .todo-right-wrapper {
     display: flex;
     align-items: center;
     justify-content: start;
+    margin-right: 5px;
 }
 
 .todo-item:hover img {
@@ -409,10 +420,13 @@ h1 {
 .todo-right-wrapper img {
     height: 25px;
     display: none;
+    border-radius: 50%;
+    padding: 5px;
 }
 
 .todo-right-wrapper img:hover {
     opacity: 1;
+    background-color: #45869fdb;
 }
 
 .todos-header {
