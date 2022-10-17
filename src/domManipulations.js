@@ -3,7 +3,7 @@ import trashImg from './assets/trash.png';
 import editImg from './assets/edit.png';
 import acceptImg from './assets/check.png';
 import cancelImg from './assets/cancel.png';
-import {createProject, deleteProject, editProject, setActiveProject, createTodo, deleteTodo} from './index';
+import {createProject, deleteProject, editProject, setActiveProject, createTodo, deleteTodo, markTodoComplete} from './index';
 import { projectLibrary } from './objects';
 
 export const createProjectElement = function (name, id) {
@@ -358,16 +358,22 @@ export const getTodoValues = function () {
     return {name, description, dueDate, priority}
 }
 
-export const createTodoElement = function (id, name, priority) {
+export const createTodoElement = function (id, name, priority, completed) {
     let baseTodoElement = document.querySelector('#base-todo-item');
     let newTodoElement = baseTodoElement.cloneNode(true);
     newTodoElement.classList.add('activeTodo');
+    if (completed) newTodoElement.classList.add('complete');
+    toggleCheckbox(newTodoElement)
     newTodoElement.removeAttribute('id');
     newTodoElement.dataset.todoId = `${id}`;
 
     //add eventlistener to trash icon
     let trashIcon = newTodoElement.querySelector('.todo-trash-icon')
     trashIcon.addEventListener('click', deleteTodo)
+
+    //add eventlistenr to checkbox
+    let checkbox = newTodoElement.querySelector('.checkbox')
+    checkbox.addEventListener('change', (e) => markTodoComplete(e))
 
     let newTodoTitleElement = newTodoElement.querySelector('.todo-left-wrapper').querySelector('p')
     newTodoTitleElement.innerText = `${name}`;
@@ -415,4 +421,19 @@ export const removeTodoElements = function () {
 export const updateItemsTitle = function () {
     let header = document.querySelector('.todos-header');
     header.innerText = `Items in ${projectLibrary.library[projectLibrary.active].name}`
+}
+
+export const markTodoElementComplete = function (e) {
+    let element = e.target.closest('.todo-item')
+    let id = element.dataset.todoId
+    element.classList.toggle('complete')
+    toggleCheckbox(element)
+    return id
+}
+
+const toggleCheckbox = function (element) {
+    if (element.classList.contains('complete')){
+        let checkbox = element.querySelector('.checkbox')
+        checkbox.checked = true
+    }
 }

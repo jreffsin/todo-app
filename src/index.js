@@ -1,5 +1,5 @@
 import css from "./main.css";
-import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues, createTodoElement, clearTodoInputFields, removeTodoElements, updateItemsTitle, removeTodoElement} from "./domManipulations"
+import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues, createTodoElement, clearTodoInputFields, removeTodoElements, updateItemsTitle, removeTodoElement, markTodoElementComplete} from "./domManipulations"
 import {projectLibrary, createProjectObject, createTodoObject} from "./objects"
 
 export const createProject = function (arg) {
@@ -87,14 +87,22 @@ export const deleteTodo = function (e) {
     delete projectLibrary.library[projectLibrary.active].todoLibrary[id]
 }
 
+export const markTodoComplete = function (e) {
+    let id = markTodoElementComplete(e)
+    let todo = projectLibrary.library[projectLibrary.active].todoLibrary[id]
+    todo.completed = !todo.completed
+    console.log(projectLibrary);
+}
+
 const populateTodoElements = function () {
     let todoLibrary = projectLibrary.library[projectLibrary.active].todoLibrary
     for (const key in todoLibrary){
         let id = todoLibrary[key].id
         let name = todoLibrary[key].name
         let priority = todoLibrary[key].priority
+        let completed = todoLibrary[key].completed
 
-        createTodoElement(id, name, priority)
+        createTodoElement(id, name, priority, completed)
     }
 }
 

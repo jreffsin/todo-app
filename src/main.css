@@ -537,3 +537,11 @@ h1 {
 #base-todo-item {
     display: none;
 }
+
+.complete {
+    opacity: 0.5;
+}
+
+.complete p {
+    text-decoration: line-through;
+}
