@@ -371,9 +371,9 @@ export const createTodoElement = function (id, name, priority, completed) {
     let trashIcon = newTodoElement.querySelector('.todo-trash-icon')
     trashIcon.addEventListener('click', deleteTodo)
 
-    //add eventlistenr to checkbox
-    let checkbox = newTodoElement.querySelector('.checkbox')
-    checkbox.addEventListener('change', (e) => markTodoComplete(e))
+    //add click eventlistenr to leftwrapper for marking todo complete
+    let leftWrapper = newTodoElement.querySelector('.todo-left-wrapper')
+    leftWrapper.addEventListener('click', (e) => markTodoComplete(e))
 
     let newTodoTitleElement = newTodoElement.querySelector('.todo-left-wrapper').querySelector('p')
     newTodoTitleElement.innerText = `${name}`;
@@ -432,8 +432,6 @@ export const markTodoElementComplete = function (e) {
 }
 
 const toggleCheckbox = function (element) {
-    if (element.classList.contains('complete')){
-        let checkbox = element.querySelector('.checkbox')
-        checkbox.checked = true
-    }
+    let checkbox = element.querySelector('.checkbox')
+    checkbox.checked = element.classList.contains('complete')
 }

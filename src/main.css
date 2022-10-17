@@ -402,6 +402,8 @@ h1 {
     align-items: center;
     justify-content: start;
     margin-left: 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
 }
 
 .todo-left-wrapper p {
@@ -544,4 +546,14 @@ h1 {
 
 .complete p {
     text-decoration: line-through;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.todo-left-wrapper:hover {
+    background-color: var(--hoverHighlight);
 }
