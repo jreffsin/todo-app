@@ -3,7 +3,7 @@ import trashImg from './assets/trash.png';
 import editImg from './assets/edit.png';
 import acceptImg from './assets/check.png';
 import cancelImg from './assets/cancel.png';
-import {createProject, deleteProject, editProject, setActiveProject, createTodo} from './index';
+import {createProject, deleteProject, editProject, setActiveProject, createTodo, deleteTodo} from './index';
 import { projectLibrary } from './objects';
 
 export const createProjectElement = function (name, id) {
@@ -365,6 +365,10 @@ export const createTodoElement = function (id, name, priority) {
     newTodoElement.removeAttribute('id');
     newTodoElement.dataset.todoId = `${id}`;
 
+    //add eventlistener to trash icon
+    let trashIcon = newTodoElement.querySelector('.todo-trash-icon')
+    trashIcon.addEventListener('click', deleteTodo)
+
     let newTodoTitleElement = newTodoElement.querySelector('.todo-left-wrapper').querySelector('p')
     newTodoTitleElement.innerText = `${name}`;
 
@@ -384,6 +388,13 @@ export const createTodoElement = function (id, name, priority) {
     contentWrapper.insertBefore(newTodoElement, todoAdder);
 
 
+}
+
+export const removeTodoElement = function (e) {
+    let element = e.target.closest('.todo-item')
+    let id = element.dataset.todoId
+    element.remove();
+    return id
 }
 
 export const clearTodoInputFields = function () {

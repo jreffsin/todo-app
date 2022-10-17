@@ -1,5 +1,5 @@
 import css from "./main.css";
-import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues, createTodoElement, clearTodoInputFields, removeTodoElements, updateItemsTitle} from "./domManipulations"
+import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues, createTodoElement, clearTodoInputFields, removeTodoElements, updateItemsTitle, removeTodoElement} from "./domManipulations"
 import {projectLibrary, createProjectObject, createTodoObject} from "./objects"
 
 export const createProject = function (arg) {
@@ -81,6 +81,11 @@ export const createTodo = function (e) {
     clearTodoInputFields();
     console.log(projectLibrary)
 };
+
+export const deleteTodo = function (e) {
+    let id = removeTodoElement(e)
+    delete projectLibrary.library[projectLibrary.active].todoLibrary[id]
+}
 
 const populateTodoElements = function () {
     let todoLibrary = projectLibrary.library[projectLibrary.active].todoLibrary
