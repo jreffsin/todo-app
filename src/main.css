@@ -63,6 +63,7 @@ table {
 
     --hoverHighlight: #45869f76;
     --modalHoverHighlight: #45869f76;
+    --todoHoverHighlight: #45869fdb;
 
 
     /* --sidebarColor: #bfbebe; */
@@ -433,7 +434,7 @@ h1 {
 
 .todo-right-wrapper img:hover {
     opacity: 1;
-    background-color: #45869fdb;
+    background-color: var(--todoHoverHighlight);
 }
 
 .todos-header {
@@ -555,5 +556,5 @@ h1 {
 }
 
 .todo-left-wrapper:hover {
-    background-color: var(--hoverHighlight);
+    background-color: var(--todoHoverHighlight);
 }
