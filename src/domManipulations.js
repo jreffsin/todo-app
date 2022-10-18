@@ -401,25 +401,12 @@ export const createTodoElement = function (id, name, priority, completed) {
 
 const openRemTodoModal = function (e) {
     let modal = document.getElementById('removeTodoModal');
-    
-    //get targeted project id by accessing id of button's parent
-    //set the currently editing attribute of project library to the target project id
     let element = e.target.closest('.todo-item')
     projectLibrary.todoEditing = element.dataset.todoId 
-
-    // let parent = e.target.parentNode.parentNode;
-    // projectLibrary.editing = parent.dataset.projectId;
-
-    //get project name by accessing div under parent and then the value of p element under that
     let todoName = element.querySelector('p').innerHTML
-    // let projName = parent.getElementsByClassName('nameWrapper')[0].querySelector('p').innerHTML;
-
-    //access text copy of modal and pass project name into copy with delete message
     modal.querySelector('.modal-copy').innerHTML = `Delete the item "${todoName}"?`;
-
     modal.classList.add('active');
     toggleOverlay();
-
     e.stopImmediatePropagation();
 };
 
