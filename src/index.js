@@ -83,8 +83,10 @@ export const createTodo = function (e) {
 };
 
 export const deleteTodo = function (e) {
-    let id = removeTodoElement(e)
+    removeTodoElement()
+    let id = projectLibrary.todoEditing
     delete projectLibrary.library[projectLibrary.active].todoLibrary[id]
+    closeModal(e);
 }
 
 export const markTodoComplete = function (e) {
