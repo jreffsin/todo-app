@@ -3,7 +3,7 @@ import trashImg from './assets/trash.png';
 import editImg from './assets/edit.png';
 import acceptImg from './assets/check.png';
 import cancelImg from './assets/cancel.png';
-import {createProject, deleteProject, editProject, setActiveProject, createTodo, deleteTodo, markTodoComplete} from './index';
+import {createProject, deleteProject, editProject, setActiveProject, createTodo, deleteTodo, markTodoComplete, submitTodoEdits} from './index';
 import { projectLibrary } from './objects';
 
 export const createProjectElement = function (name, id) {
@@ -462,8 +462,10 @@ const toggleCheckbox = function (element) {
     checkbox.checked = element.classList.contains('complete')
 }
 
-const openEditTodoModal = function () {
-    //change title and submit button to 'edit'
+const openEditTodoModal = function (e) {
+    let id = e.target.closest('.todo-item').getAttribute('data-todo-id')
+    projectLibrary.todoEditing = id
+
     updateTodoModalContextText()
     updateEditTodoModalValues()
     removeDefaultTodoModalCloseListeners()
@@ -535,23 +537,7 @@ const editTodoKeypressFunc = function (e) {
     }
 }
 
-const submitTodoEdits = function (e) {
-    let todoValues = getTodoValues()
-    updateTodoValues(todoValues)
-    updateTodoElement()
-    closeEditTodoModal(e)
-}
-
-const updateTodoValues = function (todoValues) {
-    let id = projectLibrary.todoEditing
-    let todo = projectLibrary.library[projectLibrary.active].todoLibrary
-    todo[id].name = todoValues.name
-    todo[id].description = todoValues.description
-    todo[id].dueDate = todoValues.dueDate
-    todo[id].priority = todoValues.priority
-}
-
-const updateTodoElement = function () {
+export const updateTodoElement = function () {
     let element = document.querySelector(`[data-todo-id="${projectLibrary.todoEditing}"]`)
     let todo = projectLibrary.library[projectLibrary.active].todoLibrary[projectLibrary.todoEditing]
 
@@ -607,8 +593,7 @@ const removeEditTodoModalCloseListeners = function () {
     };
 }
 
-
-const closeEditTodoModal = function (e) {
+export const closeEditTodoModal = function (e) {
     closeModal(e)
     removeTodoSubmitEditListener()
     addTodoSubmitListener()

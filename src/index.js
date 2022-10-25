@@ -1,5 +1,5 @@
 import css from "./main.css";
-import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues, createTodoElement, clearTodoInputFields, removeTodoElements, updateItemsTitle, removeTodoElement, markTodoElementComplete} from "./domManipulations"
+import {createProjectElement, createProjectForm, addProjectFormListener, removeProjectElem, initModals, closeModal, editProjectElem, removeActiveProjectElementToggle, addActiveProjectElementToggle, addTodoAdderListener, addPriorityButtonsEventListeners, addTodoSubmitListener, getTodoValues, createTodoElement, clearTodoInputFields, removeTodoElements, updateItemsTitle, removeTodoElement, markTodoElementComplete, updateTodoElement, closeEditTodoModal} from "./domManipulations"
 import {projectLibrary, createProjectObject, createTodoObject} from "./objects"
 
 export const createProject = function (arg) {
@@ -106,6 +106,22 @@ const populateTodoElements = function () {
 
         createTodoElement(id, name, priority, completed)
     }
+}
+
+export const submitTodoEdits = function (e) {
+    let todoValues = getTodoValues()
+    updateTodoValues(todoValues)
+    updateTodoElement()
+    closeEditTodoModal(e)
+}
+
+const updateTodoValues = function (todoValues) {
+    let id = projectLibrary.todoEditing
+    let todo = projectLibrary.library[projectLibrary.active].todoLibrary
+    todo[id].name = todoValues.name
+    todo[id].description = todoValues.description
+    todo[id].dueDate = todoValues.dueDate
+    todo[id].priority = todoValues.priority
 }
 
 
