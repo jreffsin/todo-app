@@ -334,15 +334,24 @@ export const setPriorityButton = function (e) {
 
 export const addTodoSubmitListener = function () {
     let todoSubmitButton = document.querySelector('#createTodoButton')
-    todoSubmitButton.addEventListener('click', (e) => createTodo(e))
+    todoSubmitButton.addEventListener('click', createTodo)
 
     let nameInput = document.querySelector('#todo-name');
-    nameInput.addEventListener('keypress', function (e){
-        if (e.key === 'Enter') {
-            createTodo(e);
-        }
-    });
+    nameInput.addEventListener('keypress', createTodoKeypressFunc);
+}
 
+const removeTodoSubmitListener = function () {
+    let todoSubmitButton = document.querySelector('#createTodoButton')
+    todoSubmitButton.removeEventListener('click', createTodo)
+
+    let nameInput = document.querySelector('#todo-name');
+    nameInput.removeEventListener('keypress', createTodoKeypressFunc);
+}
+
+const createTodoKeypressFunc = function (e){
+    if (e.key === 'Enter') {
+        createTodo(e);
+    }
 }
 
 export const getTodoValues = function () {
@@ -373,6 +382,10 @@ export const createTodoElement = function (id, name, priority, completed) {
     //add eventlistener to trash icon
     let trashIcon = newTodoElement.querySelector('.todo-trash-icon')
     trashIcon.addEventListener('click', openRemTodoModal)
+
+    //add eventlistener to edit icon
+    let editIcon = newTodoElement.querySelector('.todo-edit-icon')
+    editIcon.addEventListener('click', openEditTodoModal)
 
     //add click eventlistenr to leftwrapper for marking todo complete
     let leftWrapper = newTodoElement.querySelector('.todo-left-wrapper')
@@ -448,3 +461,161 @@ const toggleCheckbox = function (element) {
     let checkbox = element.querySelector('.checkbox')
     checkbox.checked = element.classList.contains('complete')
 }
+
+const openEditTodoModal = function () {
+    //change title and submit button to 'edit'
+    updateTodoModalContextText()
+    updateEditTodoModalValues()
+    removeDefaultTodoModalCloseListeners()
+    addEditTodoModalCloseListeners()
+    openAddTodoModal()
+    removeTodoSubmitListener()
+    addTodoSubmitEditListener()
+}
+
+const updateTodoModalContextText = function () {
+    let modal = document.querySelector('#createTodoModal')
+    let submitButton = modal.querySelector('#createTodoButton')
+
+    if (submitButton.innerText === 'Create'){
+        submitButton.innerText = 'Update'
+        modal.querySelector('.modal-title').innerText = 'Edit to-do item'
+    }
+    else {
+        submitButton.innerText = 'Create'
+        modal.querySelector('.modal-title').innerText = 'Create to-do item'
+    }
+}
+
+const updateEditTodoModalValues = function () {
+    let id = projectLibrary.todoEditing
+    let todo = projectLibrary.library[projectLibrary.active].todoLibrary
+
+    let name = document.querySelector('#todo-name')
+    let description = document.querySelector('#todo-description')
+    let dueDate = document.querySelector('#todo-due')
+
+    name.value = todo[id].name
+    description.value = todo[id].description
+    dueDate.value = todo[id].dueDate
+
+    if (todo[id].priority === 'low'){
+        document.querySelector('#low-priority').classList.add('active')
+        return
+    }
+    if (todo[id].priority === 'medium'){
+        document.querySelector('#med-priority').classList.add('active')
+        return
+    }
+    if (todo[id].priority === 'high'){
+        document.querySelector('#high-priority').classList.add('active')
+        return
+    }
+}
+
+const addTodoSubmitEditListener = function () {
+    let submitButton = document.querySelector('#createTodoButton')
+    submitButton.addEventListener('click', submitTodoEdits)
+
+    let nameInput = document.querySelector('#todo-name');
+    nameInput.addEventListener('keypress', editTodoKeypressFunc);
+}
+
+const removeTodoSubmitEditListener = function () {
+    let submitButton = document.querySelector('#createTodoButton')
+    submitButton.removeEventListener('click', submitTodoEdits)
+
+    let nameInput = document.querySelector('#todo-name');
+    nameInput.removeEventListener('keypress', editTodoKeypressFunc);
+}
+
+const editTodoKeypressFunc = function (e) {
+    if (e.key === 'Enter') {
+        submitTodoEdits(e);
+    }
+}
+
+const submitTodoEdits = function (e) {
+    let todoValues = getTodoValues()
+    updateTodoValues(todoValues)
+    updateTodoElement()
+    closeEditTodoModal(e)
+}
+
+const updateTodoValues = function (todoValues) {
+    let id = projectLibrary.todoEditing
+    let todo = projectLibrary.library[projectLibrary.active].todoLibrary
+    todo[id].name = todoValues.name
+    todo[id].description = todoValues.description
+    todo[id].dueDate = todoValues.dueDate
+    todo[id].priority = todoValues.priority
+}
+
+const updateTodoElement = function () {
+    let element = document.querySelector(`[data-todo-id="${projectLibrary.todoEditing}"]`)
+    let todo = projectLibrary.library[projectLibrary.active].todoLibrary[projectLibrary.todoEditing]
+
+    let elementName = element.querySelector('p')
+    elementName.innerText = `${todo.name}`
+
+    element.classList.remove('lowPriority')
+    element.classList.remove('mediumPriority')
+    element.classList.remove('highPriority')
+
+    if (todo.priority === 'low'){
+        element.classList.add('lowPriority')
+    }
+    if (todo.priority === 'medium'){
+        element.classList.add('mediumPriority')
+    }
+    if (todo.priority === 'high'){
+        element.classList.add('highPriority')
+    }
+}
+
+const addDefaultTodoModalCloseListeners = function () {
+    let editTodoModal = document.querySelector('#createTodoModal')
+    let closeButtons = editTodoModal.getElementsByClassName('close-button');
+    for (let i = 0; i < closeButtons.length; i++){
+        closeButtons[i].addEventListener('click', closeModal);
+    };
+}
+
+const removeDefaultTodoModalCloseListeners = function () {
+    let editTodoModal = document.querySelector('#createTodoModal')
+    let closeButtons = editTodoModal.getElementsByClassName('close-button');
+    for (let i = 0; i < closeButtons.length; i++){
+        closeButtons[i].removeEventListener('click', closeModal);
+    };
+}
+
+const addEditTodoModalCloseListeners = function () {
+    //bind click event handlers to modal close buttons
+    let editTodoModal = document.querySelector('#createTodoModal')
+    let closeButtons = editTodoModal.getElementsByClassName('close-button');
+    for (let i = 0; i < closeButtons.length; i++){
+        closeButtons[i].addEventListener('click', closeEditTodoModal);
+    };
+}
+
+const removeEditTodoModalCloseListeners = function () {
+    //bind click event handlers to modal close buttons
+    let editTodoModal = document.querySelector('#createTodoModal')
+    let closeButtons = editTodoModal.getElementsByClassName('close-button');
+    for (let i = 0; i < closeButtons.length; i++){
+        closeButtons[i].removeEventListener('click', closeEditTodoModal);
+    };
+}
+
+
+const closeEditTodoModal = function (e) {
+    closeModal(e)
+    removeTodoSubmitEditListener()
+    addTodoSubmitListener()
+    setTimeout(updateTodoModalContextText, 200)
+    setTimeout(clearTodoInputFields, 200)
+    removeEditTodoModalCloseListeners()
+    addDefaultTodoModalCloseListeners()
+}
+
+
