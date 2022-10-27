@@ -603,4 +603,20 @@ export const closeEditTodoModal = function (e) {
     addDefaultTodoModalCloseListeners()
 }
 
+export const toggleTodoPanelElementsVis = function () {
+    let title = document.querySelector('.todos-header')
+    let adder = document.querySelector('.todo_adder')
+    let noProjElem = document.querySelector('#no-project-wrapper')
+    if (projectLibrary.active === -1){
+        title.style.display = 'none'
+        adder.style.display = 'none'
+        noProjElem.style.display = 'flex'
+        return
+    }
+    title.style.display = 'block'
+    adder.style.display = 'flex'
+    noProjElem.style.display = 'none'
+}
+
+
 
