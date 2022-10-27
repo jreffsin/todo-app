@@ -229,6 +229,7 @@ const openRemProjModal = function (e) {
     toggleOverlay();
 
     e.stopImmediatePropagation();
+    console.log(projectLibrary)
 };
 
 export const closeModal = function (e) {

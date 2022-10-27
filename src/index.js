@@ -72,7 +72,7 @@ const getEventContainingDiv = function (e) {
 }
 
 const updateActiveInProjectLibrary = function (e, target) {
-    projectLibrary.active = e === 0 ? 0 : target.dataset.projectId;
+    projectLibrary.active = e === 0 ? '0' : target.dataset.projectId;
 }
 
 export const setProjectBeingEdited = function (id) {
