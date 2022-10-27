@@ -216,7 +216,7 @@ const openRemProjModal = function (e) {
     
     //get targeted project id by accessing id of button's parent
     //set the currently editing attribute of project library to the target project id
-    let parent = e.target.parentNode.parentNode;
+    let parent = e.target.closest('.project');
     projectLibrary.editing = parent.dataset.projectId;
 
     //get project name by accessing div under parent and then the value of p element under that

@@ -140,6 +140,8 @@ createProject("To-Do's");
 setActiveProject(0);
 initModals();
 
+console.log(projectLibrary)
+
 
 //todo: 
 
