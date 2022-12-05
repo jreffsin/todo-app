@@ -193,6 +193,13 @@ h1 {
     padding-right: 10px;
     border-radius: 20px;
     opacity: 0.65;
+    max-width: 200px;
+}
+
+.nameWrapper p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .project_adder,
