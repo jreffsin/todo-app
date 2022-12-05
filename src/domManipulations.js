@@ -88,7 +88,7 @@ export const createProjectForm = function () {
     formInput.id = 'projectNameField';
     formInput.setAttribute = ('type', 'text');
     formInput.placeholder = 'project name';
-    // formInput.maxLength = '10';
+    formInput.maxLength = '40';
     formWrapper.appendChild(formInput);
 
     //add enter key listener to text input
