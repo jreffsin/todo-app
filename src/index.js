@@ -143,3 +143,4 @@ initModals();
 //todo: setup initial state of app with project and todo items
 //make it so clicking on item shows info about item
 //set max length for todo item name
+//check to make sure they've entered a name for projects and todo items
