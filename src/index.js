@@ -140,14 +140,6 @@ createProject("To-Do's");
 setActiveProject(0);
 initModals();
 
-console.log(projectLibrary)
-
-
-//todo: 
-
-//nice-to-haves below
-
-//set project title = to project name (and update on changes) so that
-//hover will cause tooltip to popup with full title listed
-//also make it so projects just ... after certain length
-//then project names can be longer
+//todo: setup initial state of app with project and todo items
+//make it so clicking on item shows info about item
+//set max length for todo item name

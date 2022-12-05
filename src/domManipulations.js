@@ -27,6 +27,9 @@ export const createProjectElement = function (name, id) {
     projectName.innerHTML = `${name}`;
     projectNameWrapper.appendChild(projectName);
 
+    //add title to nameWrapper div
+    projectNameWrapper.setAttribute('title', `${name}`);
+
     //add project name and icon wrapper div to new project div
     newProject.appendChild(projectNameWrapper);
 
@@ -151,7 +154,7 @@ const createEditProjectForm = function (element) {
     formInput.id = 'projectNameField';
     formInput.setAttribute = ('type', 'text');
     formInput.value = projectLibrary.library[projectLibrary.editing].name; //set form value to the name of project that's currently being edited
-    formInput.maxLength = '10';
+    formInput.maxLength = '40';
     formWrapper.appendChild(formInput);
 
     //add enter key listener to text input
@@ -286,6 +289,7 @@ const addEditProjectElem = function (e) {
 export const editProjectElem = function () {
     let parent = document.querySelector(`[data-project-id='${projectLibrary.editing}']`); //select project element that's currently being edited
     parent.querySelector('p').innerHTML = `${projectLibrary.library[projectLibrary.editing].name}`; //change display name of project to whatever's listed in object storage
+    parent.querySelector('.nameWrapper').setAttribute('title', `${projectLibrary.library[projectLibrary.editing].name}`)
     parent.style.display = 'flex'; //show project div
     removeProjectForm(); //remove edit project div
 };
