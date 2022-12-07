@@ -392,9 +392,12 @@ export const createTodoElement = function (id, name, priority, completed) {
     let editIcon = newTodoElement.querySelector('.todo-edit-icon')
     editIcon.addEventListener('click', openEditTodoModal)
 
-    //add click eventlistenr to leftwrapper for marking todo complete
+    //add click eventlistener to leftwrapper for marking todo complete
     let leftWrapper = newTodoElement.querySelector('.todo-left-wrapper')
     leftWrapper.addEventListener('click', (e) => markTodoComplete(e))
+
+    //ass click eventlistener to todo item div for opening view todo modal
+    newTodoElement.addEventListener('click', openViewTodoModal)
 
     let newTodoTitleElement = newTodoElement.querySelector('.todo-left-wrapper').querySelector('p')
     newTodoTitleElement.innerText = `${name}`;
@@ -622,6 +625,29 @@ export const toggleTodoPanelElementsVis = function () {
     title.style.display = 'block'
     adder.style.display = 'flex'
     noProjElem.style.display = 'none'
+}
+
+const openViewTodoModal = function (e) {
+    let id = e.target.closest('.todo-item').getAttribute('data-todo-id')
+
+    updateViewTodoModalValues(id)
+
+    document.querySelector('#viewTodoModal').classList.add('active')
+    toggleOverlay();
+}
+
+const updateViewTodoModalValues = function (id) {
+    let name = document.querySelector('#view-name')
+    let description = document.querySelector('#view-description')
+    let due = document.querySelector('#view-due')
+    let priority = document.querySelector('#view-priority')
+
+    let todo = projectLibrary.library[projectLibrary.active].todoLibrary[id]
+
+    name.innerText = `${todo.name}`
+    description.innerText = `${todo.description}`
+    due.innerText = `${todo.dueDate}`
+    priority.innerText = `${todo.priority}`
 }
 
 
