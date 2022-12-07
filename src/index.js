@@ -100,7 +100,7 @@ export const markTodoComplete = function (e) {
     let id = markTodoElementComplete(e)
     let todo = projectLibrary.library[projectLibrary.active].todoLibrary[id]
     todo.completed = !todo.completed
-    console.log(projectLibrary);
+    e.stopImmediatePropagation();
 }
 
 const populateTodoElements = function () {

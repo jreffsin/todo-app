@@ -478,6 +478,7 @@ const openEditTodoModal = function (e) {
     openAddTodoModal()
     removeTodoSubmitListener()
     addTodoSubmitEditListener()
+    e.stopImmediatePropagation();
 }
 
 const updateTodoModalContextText = function () {
@@ -622,6 +623,7 @@ export const toggleTodoPanelElementsVis = function () {
     adder.style.display = 'flex'
     noProjElem.style.display = 'none'
 }
+
 
 
 
