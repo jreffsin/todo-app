@@ -447,11 +447,12 @@ h1 {
 }
 
 .todos-header {
-    height: 30px;
+    height: 35px;
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 5px;
     font-size: 30px;
+    line-height: 35px;
     color: black;
     cursor: default;
     text-overflow: ellipsis;
