@@ -571,3 +571,22 @@ h1 {
 .todo-left-wrapper:hover {
     background-color: var(--todoHoverHighlight);
 }
+
+.viewTodoBody {
+    display: grid;
+    grid-template-columns: min-content;
+    justify-content: left;
+}
+
+.viewFieldWrapper {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+}
+
+.view-label {
+    font-weight: 600;
+}
+
+.view-value {
+    margin-left: 10px;
+}

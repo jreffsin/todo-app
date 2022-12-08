@@ -647,7 +647,7 @@ const updateViewTodoModalValues = function (id) {
     name.innerText = `${todo.name}`
     description.innerText = `${todo.description}`
     due.innerText = `${todo.dueDate}`
-    priority.innerText = `${todo.priority}`
+    priority.innerText = todo.priority ? `${todo.priority}` : ''
 }
 
 
