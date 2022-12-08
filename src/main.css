@@ -574,13 +574,15 @@ h1 {
 
 .viewTodoBody {
     display: grid;
-    grid-template-columns: min-content;
+    grid-template-columns: 1fr;
     justify-content: left;
 }
 
 .viewFieldWrapper {
     display: grid;
     grid-template-columns: min-content 1fr;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .view-label {
@@ -589,4 +591,5 @@ h1 {
 
 .view-value {
     margin-left: 10px;
+    word-break: break-all;
 }
