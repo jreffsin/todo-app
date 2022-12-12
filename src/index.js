@@ -174,6 +174,4 @@ initModals();
 
 //set max length for todo item name
 
-//check to make sure they've entered a name for projects and todo items
-
 //clear todo input fields when closing addTodoModal
