@@ -81,6 +81,13 @@ export const setProjectBeingEdited = function (id) {
 
 export const createTodo = function (e) {
 
+    let nameField = document.querySelector('#todo-name')
+    if (nameField.value.trim().length === 0){
+        alert('Please enter a valid item name')
+        nameField.focus()
+        return;
+    }
+
     let todoValues = getTodoValues()
     let todo = createTodoObject(projectLibrary.library[projectLibrary.active], todoValues.name, todoValues.description, todoValues.dueDate, todoValues.priority)
     createTodoElement(todo.id, todo.name, todo.priority);
@@ -116,6 +123,14 @@ const populateTodoElements = function () {
 }
 
 export const submitTodoEdits = function (e) {
+
+    let nameField = document.querySelector('#todo-name')
+    if (nameField.value.trim().length === 0){
+        alert('Please enter a valid item name')
+        nameField.focus()
+        return;
+    }
+
     let todoValues = getTodoValues()
     updateTodoValues(todoValues)
     updateTodoElement()
@@ -145,3 +160,5 @@ initModals();
 //set max length for todo item name
 
 //check to make sure they've entered a name for projects and todo items
+
+//clear todo input fields when closing addTodoModal
