@@ -10,6 +10,12 @@ export const createProject = function (arg) {
     ? arg
     : document.getElementById('projectNameField').value;
 
+    if (name.trim().length === 0){
+        alert('Please enter a valid project name')
+        document.getElementById('projectNameField').focus()
+        return;
+    }
+
     let id = createProjectObject(name);
     createProjectElement(name, id);
 };
@@ -41,7 +47,16 @@ const handleActiveProjDelete = function () {
 }
 
 export const editProject = function () {
-    projectLibrary.library[projectLibrary.editing].name = document.getElementById('projectNameField').value; //update name of project in library to the entered value in edit form
+
+    let name = document.getElementById('projectNameField').value
+
+    if (name.trim().length === 0){
+        alert('Please enter a valid project name')
+        document.getElementById('projectNameField').focus()
+        return;
+    }
+
+    projectLibrary.library[projectLibrary.editing].name = name; //update name of project in library to the entered value in edit form
     editProjectElem();
     updateItemsTitle();
 };
