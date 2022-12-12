@@ -171,7 +171,3 @@ setActiveProject(0);
 initModals();
 
 //todo: setup initial state of app with project and todo items
-
-//set max length for todo item name
-
-//clear todo input fields when closing addTodoModal

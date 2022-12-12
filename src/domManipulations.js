@@ -236,6 +236,11 @@ const openRemProjModal = function (e) {
 };
 
 export const closeModal = function (e) {
+
+    if (e.target.closest('.modal').id == "createTodoModal"){
+        clearTodoInputFields()
+    }
+
     e.target.closest('.modal').classList.remove('active');
     toggleOverlay();
 };
