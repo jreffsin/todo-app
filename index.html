@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Doodlr</title>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+<body>
+    <header>
+        <img src="imgs/logo.png">
+        <h1>To-Doodlr</h1>
+    </header>
+
+    <div class="sidebar">
+        <div class="projects-header">Projects</div>
+        <div class="active_projects"></div>
+        <div class="project_adder">
+            <img src="imgs/add.png" class="addIcon">
+            <p>New Project</p>
+        </div>
+    </div>
+    <div class="content_wrapper">
+
+        <div class="todos-header">Items</div>
+        <div class="todo-item" id="base-todo-item">
+            <div class="todo-left-wrapper">
+                <input type="checkbox" class="checkbox">
+                <p class="todo-name">Test</p>
+            </div>
+            <div class="todo-right-wrapper">
+                <img title="Edit" class="todo-edit-icon" src="imgs/edit.png">
+                <img title="Delete" class="todo-trash-icon" src="imgs/trash.png">
+            </div>
+        </div>
+        <div class="todo_adder">
+            <img src="imgs/add.png" class="addIcon">
+            <p>New To-Do Item</p>
+        </div>
+
+        <div id="no-project-wrapper">
+            <h2 id="no-project-title">No Project Selected</h2>
+            <p id="no-project-text">Select a project to see items here</p>
+        </div>
+
+    </div>
+
+    <div id="overlay"></div>
+
+    <div class="modal" id="removeProjectModal">
+        <div class="modal-header">
+            <div class="modal-title">Remove project</div>
+            <img src="imgs/cancel.png" class="close-button">
+        </div>
+        <div class="modal-body">
+            <div class="modal-copy"></div>
+            <div class="modal-buttons">
+                <button class="cancel-button close-button">Cancel</button>
+                <button class="delete-button" id="remProjDelButton">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="removeTodoModal">
+        <div class="modal-header">
+            <div class="modal-title">Remove to-do item</div>
+            <img src="imgs/cancel.png" class="close-button">
+        </div>
+        <div class="modal-body">
+            <div class="modal-copy"></div>
+            <div class="modal-buttons">
+                <button class="cancel-button close-button">Cancel</button>
+                <button class="delete-button" id="remTodoDelButton">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="createTodoModal">
+        <div class="modal-header">
+            <div class="modal-title">Create to-do item</div>
+            <img src="imgs/cancel.png" class="close-button">
+        </div>
+        <div class="modal-body">
+            <form id="todo-create-form" onsubmit="return false">
+                <label for="todo-name">Name*:</label> 
+                <input id="todo-name" name="todo-name" type="text" autocomplete="off" maxlength="40">
+                <label for="todo-description">Description:</label>
+                <textarea id="todo-description" name="todo-description" cols="40" rows="4" autocomplete="off"></textarea>
+                <label for="todo-due">Due:</label>
+                <input type="date" id="todo-due" name="todo-due">
+                <label for="low-priority" id="todo-priority">Priority:</label>
+                <div id="priority-buttons-wrapper">
+                    <button data-priority-level = "low" class="priority-button" id="low-priority" type="button">Low</button>
+                    <button data-priority-level = "medium" class="priority-button" id="med-priority" type="button">Medium</button>
+                    <button data-priority-level = "high" class="priority-button" id="high-priority" type="button">High</button>
+                </div>
+            </form>
+            <div class="modal-buttons">
+                <button class="cancel-button close-button">Cancel</button>
+                <button class="action-button" id="createTodoButton">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="viewTodoModal">
+        <div class="modal-header">
+            <div class="modal-title">To-do item</div>
+            <img src="imgs/cancel.png" class="close-button">
+        </div>
+        <div class="modal-body viewTodoBody">
+            <div class="viewFieldWrapper">
+                <div class="view-label" id="name-label">Name:</div>
+                <div class="view-value" id="view-name">Sample text</div>
+            </div>
+            <div class="viewFieldWrapper">
+                <div class="view-label" id="description-label">Description:</div>
+                <div class="view-value" id="view-description"></div>
+            </div>
+            <div class="viewFieldWrapper">
+                <div class="view-label" id="due-label">Due:</div>
+                <div class="view-value" id="view-due"></div>
+            </div>
+            <div class="viewFieldWrapper">
+                <div class="view-label" id="priority-label">Priority:</div>
+                <div class="view-value" id="view-priority"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
