@@ -108,7 +108,6 @@ export const createTodo = function (e) {
     createTodoElement(todo.id, todo.name, todo.priority);
     closeModal(e)
     clearTodoInputFields();
-    console.log(projectLibrary)
 };
 
 export const deleteTodo = function (e) {
@@ -161,13 +160,40 @@ const updateTodoValues = function (todoValues) {
     todo[id].priority = todoValues.priority
 }
 
+const initSampleValues = function () {
+    //initialize sample values for projects and todo items
+    createProject("Finish App");
+    createTodoObject(projectLibrary.library[0], 'Complete styling', 'Update css to reflect new styling decisions', '2023-11-02', 'high')
+    createTodoObject(projectLibrary.library[0], 'Add language support', 'Implement ability to select language', '2024-02-16', 'medium')
+    createTodoObject(projectLibrary.library[0], 'Fix bugs', 'Squash all the bugs!', '2024-03-10', 'low')
+    createTodoObject(projectLibrary.library[0], 'Push to GitHub', "Don't forget to commit changes!", '', 'high')
+    projectLibrary.library[0].todoLibrary[0].completed = true
+    projectLibrary.library[0].todoLibrary[2].completed = true
 
-addProjectFormListener();
-addTodoAdderListener();
-addPriorityButtonsEventListeners();
-addTodoSubmitListener();
-createProject("To-Do's");
-setActiveProject(0);
-initModals();
+    createProject("Groceries");
+    createTodoObject(projectLibrary.library[1], 'Eggs', '', '', '')
+    createTodoObject(projectLibrary.library[1], 'Milk', '', '', '')
+    createTodoObject(projectLibrary.library[1], 'Bread', '', '', '')
+    createTodoObject(projectLibrary.library[1], 'Coffee', '', '', '')
+    createTodoObject(projectLibrary.library[1], 'Carrots', '', '', '')
+    createTodoObject(projectLibrary.library[1], 'Oatmeal', '', '', '')
 
-//todo: setup initial state of app with project and todo items
+    createProject("Gym");
+    createTodoObject(projectLibrary.library[2], 'Leg day', 'Workout quads and calves', '', 'low')
+    createTodoObject(projectLibrary.library[2], 'Arm day', 'Work on those pythons', '', 'high')
+    createTodoObject(projectLibrary.library[2], 'Cardio', 'Break a sweat', '', 'high')
+    projectLibrary.library[2].todoLibrary[11].completed = true
+    projectLibrary.library[2].todoLibrary[12].completed = true
+}
+
+const initApp = function () {
+    addProjectFormListener();
+    addTodoAdderListener();
+    addPriorityButtonsEventListeners();
+    addTodoSubmitListener();
+    initSampleValues();
+    setActiveProject(0);
+    initModals();
+}
+
+initApp()
